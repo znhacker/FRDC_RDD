@@ -85,3 +85,7 @@ This project is based on the following repositories:
 - [MMDetection](https://github.com/open-mmlab/mmdetection)
 - [Ultralytics YOLO](https://github.com/ultralytics/yolov5)
 - [Road Damage Detector](https://github.com/sekilab/RoadDamageDetector)
+
+## Android Example
+
+A minimal Android application is provided in the `android` directory. It demonstrates how to run the exported YOLOv10 ONNX model on device using ONNX Runtime and CameraX. Follow the instructions in `android/README.md` to export the weights and build the APK.
