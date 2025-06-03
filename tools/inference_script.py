@@ -1,4 +1,4 @@
-from ultralytics import YOLOv10
+from ultralytics import YOLO, YOLOv10
 import argparse
 import os
 import torch
@@ -33,14 +33,14 @@ args = parser.parse_args()
 
 # Load the YOLO model
 model_path = args.model_file
-if engine:
+if args.engine:
     if not os.path.exists(model_path.replace('.pt', '.engine')):
         print('start to export engine model')
         export_tensor(model_path)
 
     model_path = model_path.replace('.pt', '.engine')
 
-net = YOLOv10(model_path,task='detect')
+net = YOLOv10(model_path, task='detect')
 
 # Path to the directory containing images for inference
 source_path = args.source_path
@@ -50,7 +50,7 @@ source_path = args.source_path
 results = net.predict(source=source_path, device=[0],conf=0.1,max_det=20,augment=False,imgsz=224,classes=[1,2,3,4],batch=8,half=True)
 
 # Prepare the CSV file
-csv_file_path = args.output_csv_file
+csv_file_path = args.output_file
 with open(csv_file_path, mode='w', newline='') as csvfile:
     csv_writer = csv.writer(csvfile)
     # csv_writer.writerow(['ImageId', 'PredictionString'])
